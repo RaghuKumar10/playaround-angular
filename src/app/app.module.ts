@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule }   from '@angular/forms';
+
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
@@ -17,6 +19,7 @@ import { CheckoutComponent } from './order/checkout/checkout.component';
 import { OrderConfirmationComponent } from './order/order-confirmation/order-confirmation.component';
 import { OrdersComponent } from './order/orders/orders.component';
 import { BannerComponent } from './home/banner/banner.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +34,12 @@ import { BannerComponent } from './home/banner/banner.component';
     CheckoutComponent,
     OrderConfirmationComponent,
     OrdersComponent,
-    BannerComponent
+    BannerComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     CarouselModule.forRoot()
   ],
