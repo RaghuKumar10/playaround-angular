@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule }   from '@angular/forms';
 
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,8 @@ import { OrderConfirmationComponent } from './order/order-confirmation/order-con
 import { OrdersComponent } from './order/orders/orders.component';
 import { BannerComponent } from './home/banner/banner.component';
 import { LoginComponent } from './login/login.component';
+import { JwtInterceptor } from './services/interceptors/jwt-interceptor.service';
+import { AuthorizationInterceptorService } from './services/interceptors/authorization-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -41,9 +44,14 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    CarouselModule.forRoot()
+    CarouselModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptorService, multi: true },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

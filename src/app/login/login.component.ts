@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserCredentials } from '../models/user/user-credentials';
+import { AuthenticationService } from '../services/user/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +11,20 @@ export class LoginComponent implements OnInit {
 
   credentials : UserCredentials = new UserCredentials();
 
-  constructor() { }
+  logInStatus : {status : boolean, message : string};
+
+  constructor(private authService : AuthenticationService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    alert("form is submitted");
+    console.log("form submitted");
+    this.authService.authenticate(this.credentials)
+    .subscribe(
+      res => console.log(res),
+      err => this.logInStatus = err
+    );
   }
 
 }

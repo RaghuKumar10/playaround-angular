@@ -6,10 +6,11 @@ import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductdetailComponent } from './products/productdetail/productdetail.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path : '', component : HomeComponent},
-  {path : 'products', component: ProductsComponent},
+  {path : 'products', component: ProductsComponent, canActivate : [AuthGuard] },
   {path : 'products/:id', component: ProductdetailComponent},
   {path : 'cart', component : CartComponent},
   {path : 'login', component : LoginComponent},
